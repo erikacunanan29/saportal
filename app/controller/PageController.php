@@ -9,17 +9,6 @@ class PageController extends Controller{
 		$snArray = [];
 		while(!$lm->dry()) {
 			$snArray[$lm->sn] = $lm->cast();
-
-			/*for ($i = 0; $i < count($snArray); $i++) {
-				if ($lm['sn'] == $snArray[$i]['sn']) {
-					$uniqueChecker  = false;
-					$snArray[$i] = $lm->cast();
-				}
-			}
-			
-			if ($uniqueChecker == true) {
-				$snArray[] = $lm->cast();
-			} */
 			$lm->next();
 		}
 		
@@ -115,6 +104,30 @@ class PageController extends Controller{
 			if ($uniqueChecker == true) {
 				$snArray[] = $lm->cast();
 			} 
+			$lm->next();
+		}
+
+		echo json_encode($snArray);
+	}
+
+	function update() {
+		$lm = new LogMapper($this->db);
+		$lm->load(array(),array('order'=>'id'));
+		
+		$snArray = [];
+		while(!$lm->dry()) {
+			$snArray[$lm->sn] = $lm->cast();
+
+			/*for ($i = 0; $i < count($snArray); $i++) {
+				if ($lm['sn'] == $snArray[$i]['sn']) {
+					$uniqueChecker  = false;
+					$snArray[$i] = $lm->cast();
+				}
+			}
+			
+			if ($uniqueChecker == true) {
+				$snArray[] = $lm->cast();
+			} */
 			$lm->next();
 		}
 

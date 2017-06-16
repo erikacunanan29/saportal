@@ -1,6 +1,7 @@
 (function($){
   $(function(){
 	loadData();
+	poll();
 	
 	$('.openModal').click(function(){
 		//var student_number = $('.modal-content').html($(this).attr('sn'));
@@ -62,7 +63,7 @@
 								+ '<h5 class="col s6" style="padding-top:10px;">' + day[1] + " " + day[0] + '</h5>' + 
 									'<p class="col s6 right-align"> Total Time: 00:00:00 </p>'
 								+ ' </div> <div class="collapsible-body"> ' +
-								'<table class="centered striped responsive-table"> <thead> <tr>' +
+								'<table class="centered striped responsive-table highlight bordered"> <thead> <tr>' +
 									'<th> Date </th>' +
 									'<th> In </th>' +
 									'<th> Out </th>' +
@@ -90,7 +91,7 @@
 				$('#totalTime').html(timeComputed);
 				$('.datetime-list').html(sb);
 
-				$('.datetime-list').collapsible({
+				$('.collapsible').collapsible({
 			      accordion: true,
 			      onOpen: function(el) { console.log('open'); },
 			      onClose: function(el) { console.log('closed'); } 
@@ -202,13 +203,94 @@
 			url: 'studentNumbers',
 			dataType: 'json',
 			success: function(data) {
+				var studentName = {
+					'2013-23032': "William",
+					'2011-05336': "Jem",
+					'2013-60644': "Tessa",
+					'2013-05450': "Hannah",
+					'2013-28670': "Nicole",
+					'2013-30409': "Coleen",
+					'2009-17752': "Patrick",
+					'2013-51774': "Alyssa",
+					'2013-07304': "Cid",
+					'2012-76554': "Anna",
+					'2012-07025': "Michael",
+					'2015-05444': "Miguel",
+					'2009-04386': "Paolo",
+					'2015-02574': "Michelle",
+					'2011-59046': "Charlotte",
+					'2011-50539': "Henry",
+					'2010-01251': "Gabriel",
+					'2014-62691': "Christopher",
+					'2015-62691': "Gideon",
+					'2016-58942': "Clary",
+					'2014-62692': "Jace",
+					'2014-89526': "Peter",
+					'2013-56564': "Vanessa",
+					'2013-56894': "Bill",
+					'2013-58942': "Erika",
+					'2013-12154': "James",
+					'2013-78945': "Jade",
+					"2014-78945": 'Jane',
+					"2013-78412": "Jennifer"
+				};
+
+				i=0;
+
+				$(document).ready(function() {
+					$(".card-list").children().each(function() {
+						console.log(studentName[data[i].sn]);
+						$(this).find(".cardName").html(studentName[data[i].sn]);
+						// val(studentName[data[i].sn]);
+						// if ($(this).find(".studentNum").val() == studentName[data[i].sn]) {
+						// 	console.log("ERIKA!");
+						// } else {
+						// 	console.log("CHICKEN!");
+						// }
+						i++;
+					});
+					// console.log($(".card-list").find("studentNum"));
+				});
+
+				// for(i=0; i < data.length; i++) {
+				// 	if (data[i].sn == $('.studentNum').attr('sn')) {
+				// 		$('.contentData').prepend( '<span class="card-title cardName" style="font-weight:bold;">' + studentName[data[i].sn] + ' </span> ' );	
+				// 	}
+				// }				
 			}, 
 			error: function(error) {
 				console.log(error);
 			}		
 		});
 	}
-	
+
+	function poll() {
+		$.ajax({
+	  		type : 'get',
+	  		url : 'update',
+	  		dataType : 'json',
+	  		success : function(response){
+	  			console.log(response);
+
+  				for (var sn in response) {
+				  if (response.hasOwnProperty(sn)) {
+				  	if(response[sn].type == '0'){
+				  		$('#'+sn).removeClass('teal');
+				  		$('#'+sn).addClass('blue-grey');
+				  	}
+				  	else{
+				  		$('#'+sn).removeClass('blue-grey');
+				  		$('#'+sn).addClass('teal');
+				  	}
+				  }
+				}
+
+  				setTimeout(function(){
+						poll();
+  				},3000);
+	  		}
+	  	});
+	}
 
   }); // end of document ready
 })(jQuery); // end of jQuery name space
