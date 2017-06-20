@@ -14,43 +14,11 @@
 <body class="main grey lighten-2">
 	<nav style="height: 150px !important; background-color: #7B1113 !important;">
 		<div class="nav-wrapper col m6">
-			<img src="ui/img/osa-logo.png"/>
+			<img class="responsive-img" src="ui/img/osa-logo.png"/>
 			<a href="#/" class="brand-logo" style="margin-top: 40px !important; margin-left: 20px !important; font-size: 80px !important;"> SA PORTAL </a>
 		</div>
 	</nav>
-	
-	<!-- div style="margin-top: 30px;">
-		<div class="row center">
-			<div class="col m6">
-				<div class="row"> 
-					<h5> Please enter your student number to login or logout: </h5>
-					<form class="offset-s1 col s10 card-panel z-depth-2">
-						<div class="row">
-							<div class="offset-s1 input-field col s10" style="margin-top: 35px;">
-								<input length=10 id="student_number" type="text" class="validate">
-								<label for="student_number">Student Number (XXXX-XXXXX) </label>
-							</div>
-						</div>
-					</form> 
-				</div>
-			</div>
-			<div class="col m6">
-				<div class="row"> 
-					<h5> Select your name to check your daily time record: </h5>
-					 <div class="input-field col s12">
-						<select class="offset-s1 col s10 card-panel z-depth-2">
-						  <option value="" disabled selected>Choose your name</option>
-						  <option value="1">Option 1</option>
-						  <option value="2">Option 2</option>
-						  <option value="3">Option 3</option>
-						</select>
-					  </div>
-				</div>
-			</div>
-		</div>
-	</div -->
-  
-  	
+
 	<div style="margin-top: 30px;">
 		<div class="row center">
 			<div class="row"> 
@@ -73,17 +41,17 @@
 			<repeat group=" {{ @snArray }}" value=" {{ @input }}"> 
 				<div class="col m3">
 					<check if="{{ @input.type == 0 }}">
-						<true><div id="{{ (@input.sn) }}" class="card cardStudent blue-grey "></true>
-						<false><div id="{{ (@input.sn) }}" class="card cardStudent teal "></false>
+						<true><div id="{{ (@input.sn) }}" class="card cardStudent grey lighten-2 hoverable"></true>
+						<false><div id="{{ (@input.sn) }}" class="card cardStudent teal hoverable"></false>
 					</check>
 				  
-					<div class="card-content black-text contentData" >
-						<span class="card-title cardName" style="font-weight:bold;"> "TATERS" </span>
-					  <p sn="{{ trim(@input.sn) }}" class="studentNum"> {{ trim(@input.sn) }} </p>
-					  <!-- <p> {{ @name }} </p> -->
+					<div class="card-content black-text contentData row" style="padding-top: 10px; padding-bottom:0px !important;">
+						<span class="card-title cardName col s12 center-align" style="font-weight:bold; margin: 0px;"> "" </span>
+						<img  class="col s6 cardImage responsive-img circle" style="margin-left: 25%;" src=""/>
+					  <!-- <p sn="{{ trim(@input.sn) }}" class="studentNum"> {{ trim(@input.sn) }} </p> 2013-23032 2011-05336 -->
 					</div>
 					<div class="card-action center">
-					  <button href="" sn="{{ trim(@input.sn) }}" class="waves-effect waves-light btn openModal" data-target="recordsModal" >Daily Time Record</button>
+					  <button href="" sn="{{ trim(@input.sn) }}" class="waves-effect waves-light btn openModal buttonColor teal lighten-2 " data-target="recordsModal">Daily Time Record</button>
 					</div>
 				  </div>
 				</div>
@@ -92,9 +60,6 @@
 	</div>
 	
 	<!-- Modal for the Daily Time Record-->
-	<!-- Modal Structure -->
-	 <!-- Modal Structure -->
-	
 	<div id="modal1" class="modal modal-fixed-footer">
 		<div class="modal-content">
 			<h4>Daily Record Time</h4>
